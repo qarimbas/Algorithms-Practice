@@ -87,3 +87,52 @@ SortUsingBST(A)
 	}
 	InOrderWalk(root[T]); // will output the keys in sorted order
 }
+
+BST_Delete_LeafNode(T, x) 
+{ // T: the tree, x: the leaf to be deleted
+	if (parent[x] == NULL) { // x is the only node in the tree
+	// the tree will become empty
+		root[T] = NULL;
+	}
+	else {
+		if (x == left[parent[x]]) // x is the left child of its parent
+			left[parent[x]] = NULL;
+		else // x is the right child of its parent
+			right[parent[x]] = NULL;
+	}
+}
+
+BST_Delete_SingleChildNode(T, x) 
+{
+	// T: the tree, x: the node to be deleted and it has a single child
+	child = (left[x] != NULL) ? left[x] : right[x]; // the only child of x
+	if (parent[x] == NULL) { // x is the root
+	// make that single child the new root
+		root[T] = child;
+	}
+	else { // x is not the root
+		if (x == left[parent[x]]) // x is the left child of its parent
+			left[parent[x]] = child;
+		else // x is the right child of its parent
+			right[parent[x]] = child;
+	}
+}
+
+BST_Delete(T, x) 
+{ // T: the tree, x: the node to be deleted
+	if (left[x] == NULL and right[x] == NULL) // x is a leaf node
+		BST_Delete_LeafNode(T, x);
+	elseif(left[x] == NULL or right[x] == NULL) // a single child node
+		BST_Delete_SingleChildNode(T, x);
+	else { // x is a node with two children
+	// find max in the left subtree
+		z = BST_Maximum(left[x]); // needs O(h) time
+		key[x] = key[z]; // copy the max value
+		// no need to copy key[ x ] to max node as it 
+		// will be immediately deleted
+		BST_Delete(T, z); // z : either leaf or has single child
+	}
+}
+
+//All dynamic operations run in O(h) time
+
