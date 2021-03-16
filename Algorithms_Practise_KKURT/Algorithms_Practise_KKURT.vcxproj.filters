@@ -18,7 +18,10 @@
     <ClCompile Include="Algorithms_Practise_KKURT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Algorithms1.cpp">
+    <ClCompile Include="BST_Functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RBT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
